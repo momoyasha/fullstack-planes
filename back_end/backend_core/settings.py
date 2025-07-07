@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     "api"
+    "django_q"
 ]
 
 MIDDLEWARE = [
@@ -165,3 +166,14 @@ LOGGING = {
         },
     },
 }
+
+# configurando agendador de tarefas com django-q
+Q_CLUSTER = {
+    'name': 'DjangoQ',
+    'workers': 2,
+    'timeout': 60,
+    'retry': 120,
+    'orm': 'default',
+    'scheduler': True,
+}
+
