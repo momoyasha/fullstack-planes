@@ -3,7 +3,7 @@ from django.utils import timezone
 
 class Plane (models.Model):
     # id = models.AutoField(primary_key=True)
-    serial_number = models.TextField(blank=False, null=False)
+    serial_number = models.TextField(blank=False, null=False, unique=True)
     model = models.TextField(blank=False, null=False)
     active = models.BooleanField(blank=False, null=False, default=False)
     latitude = models.FloatField(blank=True, null=True)
