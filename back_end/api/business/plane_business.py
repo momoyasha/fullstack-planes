@@ -30,7 +30,7 @@ class PlaneBusiness():
         destination_point = (gp_dist(kilometers=distance_to_travel)
                              .destination(point=current_position, bearing=new_direction))
         
-        return destination_point, new_direction
+        return destination_point.latitude, destination_point.longitude, new_direction
     
     @staticmethod
     def advance_plane_random(plane_id:int):
@@ -42,9 +42,7 @@ class PlaneBusiness():
         if not plane:
             return
 
-        destination_point, new_direction = PlaneBusiness.get_new_plane_position_random(plane_obj=plane)
-
-        new_lat, new_long = destination_point.latitude, destination_point.longitude
+        new_lat, new_long, new_direction = PlaneBusiness.get_new_plane_position_random(plane_obj=plane)
 
         plane.latitude = new_lat
         plane.longitude = new_long
