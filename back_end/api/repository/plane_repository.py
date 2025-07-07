@@ -47,6 +47,18 @@ class PlaneRepository():
 
         return plane 
     
+    @staticmethod
+    def get_all_planes():
+        """
+        Retorna todos os aviões registrados na base de dados.
+        """
+        try:
+            planes = list(Plane.objects.all())
+        except Exception:
+            planes = []
+            logger.info(f'Nenhum avião encontrado.')
+
+        return planes
 
     
 
