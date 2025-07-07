@@ -6,6 +6,7 @@ class Plane (models.Model):
     serial_number = models.TextField(blank=False, null=False, unique=True)
     model = models.TextField(blank=False, null=False)
     active = models.BooleanField(blank=False, null=False, default=False)
+    direction = models.FloatField(blank=True, null=True)
     latitude = models.FloatField(blank=True, null=True)
     longitude = models.FloatField(blank=True, null=True)
     created_at = models.DateTimeField(blank=False, null=False, default=timezone.now)
