@@ -21,6 +21,7 @@ class PlaneRepository():
             new_plane = Plane(model=model, serial_number=serial_number)
             try:
                 new_plane.save()
+                new_plane.refresh_from_db()
             except Exception:
                 raise
         else:
@@ -35,7 +36,7 @@ class PlaneRepository():
 
         return new_plane
     
-    def get_plane_by_id(id:int):
+    def get_plane_by_id(id:int) -> Plane:
         """
         Traz um avião da base de dados dado o seu id.
         """
@@ -60,5 +61,12 @@ class PlaneRepository():
 
         return planes
 
-    
+    @staticmethod
+    def update_plane(plane_obj: Plane):
+        try:
+            plane_obj.save()
+            plane_obj.refresh_from_db()
+        except Exception as ex:
+            logger.error(ex)
 
+        return plane_obj

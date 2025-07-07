@@ -1,0 +1,53 @@
+from geopy import Point
+from geopy.distance import distance as gp_dist
+from api.models.plane import Plane
+from api.utils.common_utils import CommonUtils
+from api.repository.plane_repository import PlaneRepository
+
+class PlaneBusiness():
+    """
+    Classe de funções para interagir com objetos ou
+    atributos de Planes.
+    """
+
+    @staticmethod
+    def get_new_plane_position_random(plane_obj: Plane):
+        """
+        Avança o avião para uma direção aleatória (mas ainda na frente).
+        Retorna a nova posição (Point) e a nova direção.
+        """
+        current_direction = plane_obj.direction
+        current_position = Point(latitude=plane_obj.latitude,
+                                 longitude=plane_obj.longitude)
+
+        # em graus
+        new_direction = CommonUtils.get_random_number_between((current_direction-15),
+                                                               (current_direction+15))
+        
+        # em km
+        distance_to_travel = CommonUtils.get_random_number_between(0.75, 1.25)
+
+        destination_point = (gp_dist(kilometers=distance_to_travel)
+                             .destination(point=current_position, bearing=new_direction))
+        
+        return destination_point, new_direction
+    
+    @staticmethod
+    def advance_plane_random(plane_id:int):
+        """
+        Dado um id de avião, realiza um avanço aleatório.
+        """
+        plane = PlaneRepository.get_plane_by_id(id=plane_id)
+
+        if not plane:
+            return
+
+        destination_point, new_direction = PlaneBusiness.get_new_plane_position_random(plane_obj=plane)
+
+        new_lat, new_long = destination_point.latitude, destination_point.longitude
+
+        plane.latitude = new_lat
+        plane.longitude = new_long
+        plane.direction = new_direction
+
+        PlaneRepository.update_plane(plane_obj=plane)

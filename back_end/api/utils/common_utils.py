@@ -20,3 +20,10 @@ class CommonUtils():
         """
         return ''.join(random.choices(string.digits, k=n))
 
+
+    @staticmethod
+    def get_random_number_between(a:float, b:float):
+        """
+        Retorna um float entre os 2 parâmetros fornecidos, a < b.
+        """
+        return round(random.uniform(a, b),2)

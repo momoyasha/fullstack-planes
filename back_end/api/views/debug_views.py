@@ -2,6 +2,7 @@ from api.repository.plane_repository import PlaneRepository
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from api.business.plane_business import PlaneBusiness
 
 class DebugView(APIView):
     """
@@ -9,6 +10,6 @@ class DebugView(APIView):
     Útil para debugging.
     """
     def get(self, request):
-        method_to_debug = PlaneRepository.create_plane(model="test bi-plane",
-                                                        serial_number="AX-123")
+        # plane = PlaneRepository.get_plane_by_id(id=1)
+        method_to_debug = PlaneBusiness.advance_plane_random(plane_id=1)
         return Response({"status": True }, status=status.HTTP_200_OK)
