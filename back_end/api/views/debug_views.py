@@ -9,5 +9,6 @@ class DebugView(APIView):
     Útil para debugging.
     """
     def get(self, request):
-        method_to_debug = PlaneRepository.create_plane()
+        method_to_debug = PlaneRepository.create_plane(model="test bi-plane",
+                                                        serial_number="AX-123")
         return Response({"status": True }, status=status.HTTP_200_OK)
