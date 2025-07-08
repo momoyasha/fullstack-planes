@@ -1,5 +1,4 @@
 from django.db import models
-from django.utils import timezone
 
 class Plane (models.Model):
     # id = models.AutoField(primary_key=True)
@@ -9,5 +8,5 @@ class Plane (models.Model):
     direction = models.FloatField(blank=True, null=True)
     latitude = models.FloatField(blank=True, null=True)
     longitude = models.FloatField(blank=True, null=True)
-    created_at = models.DateTimeField(blank=False, null=False, default=timezone.now)
-    updated_at = models.DateTimeField(blank=False, null=False, default=timezone.now)
+    created_at = models.DateTimeField(blank=False, null=False, auto_now_add=True)
+    updated_at = models.DateTimeField(blank=False, null=False, auto_now=True)
