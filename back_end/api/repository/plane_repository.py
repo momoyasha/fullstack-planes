@@ -68,5 +68,6 @@ class PlaneRepository():
             plane_obj.refresh_from_db()
         except Exception as ex:
             logger.error(ex)
+            return None
 
         return plane_obj
