@@ -33,7 +33,7 @@ class PlaneBusiness():
         return destination_point.latitude, destination_point.longitude, new_direction
     
     @staticmethod
-    def advance_plane_random(plane_id:int):
+    def advance_plane_randomly(plane_id:int):
         """
         Dado um id de avião, realiza um avanço aleatório.
         """
