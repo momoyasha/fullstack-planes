@@ -57,4 +57,4 @@ class PlaneBusiness():
         plane_obj = PlaneRepository.update_plane(plane_obj=plane_obj)
 
         if plane_obj:
-            logger.info(f"Posição de avião id {plane_obj.id} atualizada para ({plane_obj.lat}, {plane_obj.long})")
+            logger.info(f"Posição de avião id {plane_obj.id} atualizada para ({plane_obj.latitude}, {plane_obj.longitude})")
