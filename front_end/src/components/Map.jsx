@@ -2,12 +2,15 @@ import { MapContainer, TileLayer, useMap, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import "./Map.css";
 import ExtendedMarker from "./ExtendedMarker";
+import { useGetPlanes } from "../hooks/useGetPlanes";
 
 const Map = () => {
   // define o canto sudoeste e o canto noroeste do mapa
   const southWest = [-90, -180];
   const northEast = [90, 180];
   const bounds = [southWest, northEast];
+
+  const { planes } = useGetPlanes();
 
   return (
     <div id="map">
@@ -20,13 +23,21 @@ const Map = () => {
         maxBoundsViscosity={1}
       >
         <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          attribution='<a href="https://www.arcgis.com/home/item.html?id=a284a9b99b3446a3910d4144a50990f6">Sources: Esri, HERE, Garmin, © OpenStreetMap contributors, and the GIS User Community</a>'
           url="http://services.arcgisonline.com/arcgis/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}"
         />
         <Marker position={[0, -180]} />
         <Marker position={[0, 180]} />
         <ExtendedMarker position={[-23.0, -46.0]} color={"green"} />
         <ExtendedMarker position={[51, 0]} color={"red"} />
+        {planes &&
+          planes.map((plane) => (
+            <ExtendedMarker
+              position={[plane.latitude, plane.longitude]}
+              color={"blue"}
+              key={plane.id}
+            />
+          ))}
       </MapContainer>
     </div>
   );
