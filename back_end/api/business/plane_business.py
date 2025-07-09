@@ -3,6 +3,7 @@ from geopy.distance import distance as gp_dist
 from api.models.plane import Plane
 from api.utils.common_utils import CommonUtils
 from api.repository.plane_repository import PlaneRepository
+from typing import Optional
 
 class PlaneBusiness():
     """
@@ -33,19 +34,20 @@ class PlaneBusiness():
         return destination_point.latitude, destination_point.longitude, new_direction
     
     @staticmethod
-    def advance_plane_randomly(plane_id:int):
+    def advance_plane_randomly(plane_id:Optional[int] = None, plane_obj:Optional[Plane]=None):
         """
         Dado um id de avião, realiza um avanço aleatório.
         """
-        plane = PlaneRepository.get_plane_by_id(id=plane_id)
-
-        if not plane:
+        if not plane_id and not plane_obj:
             return
 
-        new_lat, new_long, new_direction = PlaneBusiness.get_new_plane_position_random(plane_obj=plane)
+        if not plane_obj:
+            plane_obj = PlaneRepository.get_plane_by_id(id=plane_id)
 
-        plane.latitude = new_lat
-        plane.longitude = new_long
-        plane.direction = new_direction
+        new_lat, new_long, new_direction = PlaneBusiness.get_new_plane_position_random(plane_obj=plane_obj)
 
-        PlaneRepository.update_plane(plane_obj=plane)
+        plane_obj.latitude = new_lat
+        plane_obj.longitude = new_long
+        plane_obj.direction = new_direction
+
+        PlaneRepository.update_plane(plane_obj=plane_obj)
