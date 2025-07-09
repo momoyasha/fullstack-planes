@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from api.serializers.plane_serializer import PlaneSerializer
 from rest_framework.viewsets import ViewSet
+from rest_framework.permissions import AllowAny
 
 # class PlaneByIdView(APIView):
 #     """
@@ -18,6 +19,7 @@ class PlaneViewSet(ViewSet):
     Viewset de aviões. Só aceita GET.
     """
     http_method_names = ["get"]
+    permission_classes = [AllowAny]
 
     def list(self, request):
         plane = PlaneRepository.get_all_planes()
