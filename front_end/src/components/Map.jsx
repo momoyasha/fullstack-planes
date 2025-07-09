@@ -1,6 +1,7 @@
 import { MapContainer, TileLayer, useMap, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import "./Map.css";
+import ExtendedMarker from "./ExtendedMarker";
 
 const Map = () => {
   // define o canto sudoeste e o canto noroeste do mapa
@@ -24,6 +25,8 @@ const Map = () => {
         />
         <Marker position={[0, -180]} />
         <Marker position={[0, 180]} />
+        <ExtendedMarker position={[-23.0, -46.0]} color={"green"} />
+        <ExtendedMarker position={[51, 0]} color={"red"} />
       </MapContainer>
     </div>
   );
