@@ -1,5 +1,7 @@
 // Usa o Marker base do react-leaflet e aplica algumas customizações
 import { Marker } from "react-leaflet";
+// Marker especial com slideTo para atualizar posição
+import ReactLeafletDriftMarker from "react-leaflet-drift-marker";
 import L from "leaflet";
 import "./ExtendedMarker.css";
 
@@ -10,7 +12,14 @@ const ExtendedMarker = ({ position, color }) => {
   });
 
   if (position) {
-    return <Marker position={position} icon={ColoredPlane} />;
+    // return <Marker position={position} icon={ColoredPlane} />;
+    return (
+      <ReactLeafletDriftMarker
+        position={position}
+        icon={ColoredPlane}
+        duration={1000}
+      />
+    );
   }
 };
 export default ExtendedMarker;
