@@ -3,6 +3,7 @@ import "leaflet/dist/leaflet.css";
 import "./Map.css";
 import ExtendedMarker from "./ExtendedMarker";
 import { useGetPlanes } from "../hooks/useGetPlanes";
+import PlanesOnTheMap from "./PlanesOnTheMap";
 
 const Map = () => {
   // define o canto sudoeste e o canto noroeste do mapa
@@ -10,7 +11,7 @@ const Map = () => {
   const northEast = [90, 180];
   const bounds = [southWest, northEast];
 
-  const { planes } = useGetPlanes();
+  // const { planes } = useGetPlanes();
 
   return (
     <div id="map">
@@ -30,14 +31,15 @@ const Map = () => {
         <Marker position={[0, 180]} />
         <ExtendedMarker position={[-23.0, -46.0]} color={"green"} />
         <ExtendedMarker position={[51, 0]} color={"red"} />
-        {planes &&
+        {/* {planes &&
           planes.map((plane) => (
             <ExtendedMarker
               position={[plane.latitude, plane.longitude]}
               color={"blue"}
               key={plane.id}
             />
-          ))}
+          ))} */}
+        <PlanesOnTheMap />
       </MapContainer>
     </div>
   );
