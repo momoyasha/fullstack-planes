@@ -1,8 +1,12 @@
 import { useEffect, useState } from "react";
 import { useGetPlanes } from "./useGetPlanes";
 
+import { useContext } from "react";
+import { PlanesContext } from "../context/PlanesContext";
+
 const usePeriodicallyGetPlanes = ({ ms_interval }) => {
-  const { planes, fetchPlanes } = useGetPlanes();
+  const { planes } = useContext(PlanesContext);
+  const { fetchPlanes } = useGetPlanes();
   const [count, setCount] = useState(0);
 
   useEffect(() => {
@@ -16,6 +20,6 @@ const usePeriodicallyGetPlanes = ({ ms_interval }) => {
     return () => clearInterval(intervalId);
   }, []);
 
-  return { planes };
+  //   return { planes };
 };
 export default usePeriodicallyGetPlanes;

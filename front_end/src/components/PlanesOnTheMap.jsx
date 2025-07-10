@@ -3,9 +3,13 @@ import { useEffect, useState } from "react";
 import { useGetPlanes } from "../hooks/useGetPlanes";
 import ExtendedMarker from "./ExtendedMarker";
 import usePeriodicallyGetPlanes from "../hooks/usePeriodicallyGetPlanes";
+import { useContext } from "react";
+import { PlanesContext } from "../context/PlanesContext";
 
 const PlanesOnTheMap = () => {
-  const { planes } = usePeriodicallyGetPlanes({ ms_interval: 5000 });
+  const { planes } = useContext(PlanesContext);
+
+  usePeriodicallyGetPlanes({ ms_interval: 5000 });
 
   return (
     <div id="PlanesOnTheMap">

@@ -3,8 +3,13 @@ import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App.jsx";
 
+// contextos
+import { PlanesContextProvider } from "./context/PlanesContext.jsx";
+
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <App />
+    <PlanesContextProvider>
+      <App />
+    </PlanesContextProvider>
   </StrictMode>
 );
