@@ -12,6 +12,8 @@ import {
 // contextos
 import { PlanesContextProvider } from "./context/PlanesContext.jsx";
 import LoginPage from "./components/LoginPage.jsx";
+import ProtectedRoute from "./components/ProtectedRoute.jsx";
+import { AuthenticationContextProvider } from "./context/AuthenticationContext.jsx";
 
 const router = createBrowserRouter([
   {
@@ -20,14 +22,20 @@ const router = createBrowserRouter([
   },
   {
     path: "/app",
-    element: <App />,
+    element: (
+      <ProtectedRoute isAuthenticated={true}>
+        <App />
+      </ProtectedRoute>
+    ),
   },
 ]);
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <PlanesContextProvider>
-      <RouterProvider router={router} />
-    </PlanesContextProvider>
+    <AuthenticationContextProvider>
+      <PlanesContextProvider>
+        <RouterProvider router={router} />
+      </PlanesContextProvider>
+    </AuthenticationContextProvider>
   </StrictMode>
 );

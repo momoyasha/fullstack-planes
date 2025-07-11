@@ -1,15 +1,38 @@
 import { useContext, useState } from "react";
 import { AuthenticationContext } from "../context/AuthenticationContext";
+import { useLogin } from "../hooks/useLogin";
+import fetchTokens from "../services/login";
 
 import "./LoginPage.css";
+import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleLogin = (e) => {
+  const { accessToken, refreshToken, login } = useContext(
+    AuthenticationContext
+  );
+
+  const navigate = useNavigate();
+
+  const handleLogin = async (e) => {
     e.preventDefault();
-    console.log("ey", username, password);
+    const tokens = await fetchTokens({
+      username: username,
+      password: password,
+    });
+
+    console.log(tokens);
+
+    if (!tokens) {
+      // renderizar uma mensagem, um dia
+      return;
+    }
+
+    login({ newAccessToken: tokens.access, newRefreshToken: tokens.refresh });
+
+    navigate("/app", { replace: true });
   };
 
   return (

@@ -19,7 +19,5 @@ const usePeriodicallyGetPlanes = ({ ms_interval }) => {
 
     return () => clearInterval(intervalId);
   }, []);
-
-  //   return { planes };
 };
 export default usePeriodicallyGetPlanes;
