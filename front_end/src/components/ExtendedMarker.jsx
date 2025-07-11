@@ -22,7 +22,7 @@ const ExtendedMarker = ({ position, color, rotation }) => {
         position={position}
         icon={ColoredPlane}
         duration={1000}
-        rotationAngle={rotation}
+        rotationAngle={rotation ? rotation : 0}
       />
     );
   }
