@@ -1,5 +1,4 @@
 from api.models.plane import Plane
-from api.utils.common_utils import CommonUtils
 import logging
 
 logger = logging.getLogger(__name__)
