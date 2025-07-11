@@ -6,7 +6,7 @@ import L from "leaflet";
 import "./ExtendedMarker.css";
 import "leaflet-rotatedmarker";
 
-const ExtendedMarker = ({ position, color }) => {
+const ExtendedMarker = ({ position, color, rotation }) => {
   const ColoredPlane = L.divIcon({
     className: "type-1",
     html: `<img src="/airplane_${color}.svg" id="plane-icon">`,
@@ -22,7 +22,7 @@ const ExtendedMarker = ({ position, color }) => {
         position={position}
         icon={ColoredPlane}
         duration={1000}
-        rotationAngle={270}
+        rotationAngle={rotation}
       />
     );
   }
