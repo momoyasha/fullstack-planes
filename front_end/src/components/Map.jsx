@@ -2,8 +2,10 @@ import { MapContainer, TileLayer, useMap, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import "./Map.css";
 import ExtendedMarker from "./ExtendedMarker";
-import { useGetPlanes } from "../hooks/useGetPlanes";
 import PlanesOnTheMap from "./PlanesOnTheMap";
+import { useContext } from "react";
+import { PlanesContext } from "../context/PlanesContext";
+import MapClickHandler from "./MapClickHandler";
 
 const Map = () => {
   // define o canto sudoeste e o canto noroeste do mapa
@@ -11,7 +13,7 @@ const Map = () => {
   const northEast = [90, 180];
   const bounds = [southWest, northEast];
 
-  // const { planes } = useGetPlanes();
+  const { setSelectedPlaneId } = useContext(PlanesContext);
 
   return (
     <div id="map">
@@ -23,6 +25,7 @@ const Map = () => {
         maxBounds={bounds}
         maxBoundsViscosity={1}
       >
+        <MapClickHandler onMapClick={() => setSelectedPlaneId(null)} />
         <TileLayer
           attribution='<a href="https://www.arcgis.com/home/item.html?id=a284a9b99b3446a3910d4144a50990f6">Sources: Esri, HERE, Garmin, © OpenStreetMap contributors, and the GIS User Community</a>'
           url="http://services.arcgisonline.com/arcgis/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}"

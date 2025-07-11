@@ -26,7 +26,6 @@ const ExtendedMarker = ({ planeId, position, color, rotation }) => {
   const handleClick = (e) => {
     map.setView(position, map.getZoom());
     setSelectedPlaneId(planeId);
-    console.log(selectedPlaneId);
   };
 
   if (position) {
