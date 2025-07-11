@@ -1,28 +1,42 @@
 // Usa o Marker base do react-leaflet e aplica algumas customizações
-import { Marker } from "react-leaflet";
+import { useMap } from "react-leaflet";
 // Marker especial com slideTo para atualizar posição
 import ReactLeafletDriftMarker from "react-leaflet-drift-marker";
 import L from "leaflet";
 import "./ExtendedMarker.css";
 import "leaflet-rotatedmarker";
+import { useContext } from "react";
+import { PlanesContext } from "../context/PlanesContext";
 
-const ExtendedMarker = ({ position, color, rotation }) => {
+const ExtendedMarker = ({ planeId, position, color, rotation }) => {
+  const map = useMap();
+  const { selectedPlaneId, setSelectedPlaneId } = useContext(PlanesContext);
+
+  const planeIsSelected = planeId === selectedPlaneId;
+
   const ColoredPlane = L.divIcon({
-    className: "type-1",
-    html: `<img src="/airplane_${color}.svg" id="plane-icon">`,
+    className: `type-1 ${planeIsSelected ? "selected" : ""}`,
+    html: `<img src="/airplane_${color}.svg"
+     class="plane-icon">`,
     // centraliza o referencial de posicionamento do marker
     iconSize: [50, 50],
     iconAnchor: [25, 25],
   });
 
+  const handleClick = (e) => {
+    map.setView(position, map.getZoom());
+    setSelectedPlaneId(planeId);
+    console.log(selectedPlaneId);
+  };
+
   if (position) {
-    // return <Marker position={position} icon={ColoredPlane} />;
     return (
       <ReactLeafletDriftMarker
         position={position}
         icon={ColoredPlane}
         duration={1000}
         rotationAngle={rotation ? rotation : 0}
+        eventHandlers={{ click: handleClick }}
       />
     );
   }

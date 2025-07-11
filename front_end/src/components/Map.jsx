@@ -29,16 +29,12 @@ const Map = () => {
         />
         <Marker position={[0, -180]} />
         <Marker position={[0, 180]} />
-        <ExtendedMarker position={[-23.0, -46.0]} color={"green"} />
-        <ExtendedMarker position={[51, 0]} color={"red"} />
-        {/* {planes &&
-          planes.map((plane) => (
-            <ExtendedMarker
-              position={[plane.latitude, plane.longitude]}
-              color={"blue"}
-              key={plane.id}
-            />
-          ))} */}
+        <ExtendedMarker
+          position={[-23.0, -46.0]}
+          color={"green"}
+          planeId={23}
+        />
+        <ExtendedMarker position={[51, 0]} color={"red"} planeId={35} />
         <PlanesOnTheMap />
       </MapContainer>
     </div>

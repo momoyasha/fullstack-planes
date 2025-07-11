@@ -1,4 +1,33 @@
-#plane-icon {
+.plane-icon {
   height: 50px;
   width: 50px;
+}
+
+.selected {
+  position: relative;
+}
+
+.selected::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 120px;
+  height: 120px;
+  background: #ffffffa3;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  animation: pulse-animation 3s infinite;
+  z-index: -1;
+}
+
+@keyframes pulse-animation {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(0.8);
+    opacity: 0;
+  }
 }

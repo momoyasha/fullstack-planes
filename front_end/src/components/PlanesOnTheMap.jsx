@@ -18,6 +18,7 @@ const PlanesOnTheMap = () => {
           <ExtendedMarker
             position={[plane.latitude, plane.longitude]}
             color={"blue"}
+            planeId={plane.id}
             key={plane.id}
           />
         ))}
