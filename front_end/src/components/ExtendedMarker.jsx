@@ -5,7 +5,7 @@ import ReactLeafletDriftMarker from "react-leaflet-drift-marker";
 import L from "leaflet";
 import "./ExtendedMarker.css";
 import "leaflet-rotatedmarker";
-import { useContext } from "react";
+import { useContext, useEffect, useRef } from "react";
 import { PlanesContext } from "../context/PlanesContext";
 
 const ExtendedMarker = ({ planeId, position, color, rotation }) => {
@@ -13,6 +13,8 @@ const ExtendedMarker = ({ planeId, position, color, rotation }) => {
   const { selectedPlaneId, setSelectedPlaneId } = useContext(PlanesContext);
 
   const planeIsSelected = planeId === selectedPlaneId;
+
+  const thisMarkerRef = useRef();
 
   const ColoredPlane = L.divIcon({
     className: `type-1 ${planeIsSelected ? "selected" : ""}`,
@@ -28,9 +30,17 @@ const ExtendedMarker = ({ planeId, position, color, rotation }) => {
     setSelectedPlaneId(planeId);
   };
 
+  // roda o marker na marra, já que aparentemente o leaflet-rotatedmarker não faz
+  useEffect(() => {
+    if (thisMarkerRef.current) {
+      thisMarkerRef.current.setRotationAngle(rotation);
+    }
+  }, [rotation]);
+
   if (position) {
     return (
       <ReactLeafletDriftMarker
+        ref={thisMarkerRef}
         position={position}
         icon={ColoredPlane}
         duration={1000}
