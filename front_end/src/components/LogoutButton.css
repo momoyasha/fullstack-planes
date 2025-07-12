@@ -1,0 +1,8 @@
+#logout_button {
+  position: absolute;
+  font-size: 1.25rem;
+  padding: 8px 35px;
+  margin: 1rem;
+  align-self: flex-end;
+  z-index: 1500;
+}
