@@ -10,9 +10,7 @@ const LoginPage = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const { accessToken, refreshToken, login } = useContext(
-    AuthenticationContext
-  );
+  const { login } = useContext(AuthenticationContext);
 
   const navigate = useNavigate();
 
@@ -23,14 +21,15 @@ const LoginPage = () => {
       password: password,
     });
 
-    console.log(tokens);
-
     if (!tokens) {
       // renderizar uma mensagem, um dia
       return;
     }
 
-    login({ newAccessToken: tokens.access, newRefreshToken: tokens.refresh });
+    login({
+      newAccessToken: tokens.access,
+      newRefreshToken: tokens.refresh,
+    });
 
     navigate("/app", { replace: true });
   };
