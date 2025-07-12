@@ -10,13 +10,13 @@ export const AuthenticationContext = createContext();
 export const AuthenticationContextProvider = ({ children }) => {
   const [accessToken, setAccessToken] = useState(null);
   const [refreshToken, setRefreshToken] = useState(null);
-  const [isAuthenticated, setIsAuthenticated] = useState(true);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   const login = ({ newAccessToken, newRefreshToken }) => {
     setAccessToken(newAccessToken);
     setRefreshToken(newRefreshToken);
 
-    setTokens(newAccessToken, newRefreshToken);
+    setTokens({ newAccessToken, newRefreshToken });
   };
 
   const logout = () => {

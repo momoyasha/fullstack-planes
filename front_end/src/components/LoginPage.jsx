@@ -10,7 +10,7 @@ const LoginPage = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const { login } = useContext(AuthenticationContext);
+  const { login, setIsAuthenticated } = useContext(AuthenticationContext);
 
   const navigate = useNavigate();
 
@@ -30,6 +30,8 @@ const LoginPage = () => {
       newAccessToken: tokens.access,
       newRefreshToken: tokens.refresh,
     });
+
+    setIsAuthenticated(true);
 
     navigate("/app", { replace: true });
   };

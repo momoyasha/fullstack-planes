@@ -1,18 +1,7 @@
-try {
-  const response = await fetch(url, {
-    headers: { Accept: "application/json" },
-  });
-  const json = await response.json();
-  console.log(json[0].latitude);
-  setPlanes(json);
-} catch (error) {
-  throw new Error(`Erro ao buscar aviões em ${url}: ${error}`);
-}
-
 import { REFRESH_URL } from "../config";
-import { getTokens } from "./handleTokensInStorage";
+import { getTokens, setTokens } from "./handleTokensInStorage";
 
-const customGet = async ({ url, options = {} }) => {
+const getWithAuth = async ({ url, options = {} }) => {
   try {
     const { accessToken, refreshToken } = getTokens();
 
@@ -22,7 +11,7 @@ const customGet = async ({ url, options = {} }) => {
       "Content-Type": "application/json",
     };
 
-    let fetchOptions = { ...options, headers, method: "GET" };
+    let fetchOptions = { ...options, headers: headers, method: "GET" };
 
     let response = await fetch(url, fetchOptions);
 
@@ -33,7 +22,7 @@ const customGet = async ({ url, options = {} }) => {
 
       const refreshOptions = {
         method: "POST",
-        refreshHeaders,
+        headers: refreshHeaders,
         body: refreshBody,
       };
 
@@ -57,14 +46,14 @@ const customGet = async ({ url, options = {} }) => {
 
         response = await fetch(url, fetchOptions);
       }
-
-      const json = await response.json();
-
-      return json;
     }
+
+    const json = await response.json();
+
+    return json;
   } catch (error) {
     throw new Error(`${error}`);
   }
 };
 
-export default customGet;
+export default getWithAuth;

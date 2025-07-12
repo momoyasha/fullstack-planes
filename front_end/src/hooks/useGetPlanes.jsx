@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useContext } from "react";
 import { PlanesContext } from "../context/PlanesContext";
+import getWithAuth from "../services/getWithAuth";
 
 export const useGetPlanes = () => {
   const url = "http://127.0.0.1:8000/api/planes/";
@@ -9,12 +10,10 @@ export const useGetPlanes = () => {
 
   const fetchPlanes = async () => {
     try {
-      const response = await fetch(url, {
-        headers: { Accept: "application/json" },
-      });
-      const json = await response.json();
-      console.log(json[0].latitude);
-      setPlanes(json);
+      const json = await getWithAuth({ url });
+      if (json) {
+        setPlanes(json);
+      }
     } catch (error) {
       throw new Error(`Erro ao buscar aviões em ${url}: ${error}`);
     }
