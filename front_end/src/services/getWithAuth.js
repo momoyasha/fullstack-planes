@@ -40,7 +40,10 @@ const getWithAuth = async ({ url, options = {} }) => {
           newRefreshToken: refreshToken,
         });
 
-        headers = { ...headers, Authorization: `Bearer ${accessToken}` };
+        headers = {
+          ...headers,
+          Authorization: `Bearer ${newAccessTokenJson.access}`,
+        };
 
         fetchOptions = { ...fetchOptions, headers };
 
