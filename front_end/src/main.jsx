@@ -17,6 +17,10 @@ import { AuthenticationContextProvider } from "./context/AuthenticationContext.j
 
 const router = createBrowserRouter([
   {
+    path: "/",
+    element: <Navigate to={"/app"} />,
+  },
+  {
     path: "/login",
     element: <LoginPage />,
   },
