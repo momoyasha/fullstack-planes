@@ -26,11 +26,11 @@ class PlaneBusiness():
                                  longitude=plane_obj.longitude)
 
         # em graus
-        new_direction = CommonUtils.get_random_number_between((current_direction),
-                                                               (current_direction+45))
+        new_direction = (CommonUtils.get_random_number_between((current_direction),
+                                                               (current_direction+45)) % 360)
         
         # em km
-        distance_to_travel = CommonUtils.get_random_number_between(150, 200)
+        distance_to_travel = CommonUtils.get_random_number_between(2000, 5000)
 
         destination_point = (gp_dist(kilometers=distance_to_travel)
                              .destination(point=current_position, bearing=new_direction))
