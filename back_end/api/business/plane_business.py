@@ -27,7 +27,7 @@ class PlaneBusiness():
                                  longitude=plane_obj.longitude)
 
         # em graus
-        direction_to_fly_to = (CommonUtils.get_random_number_between((current_direction-45),
+        direction_to_fly_to = (CommonUtils.get_random_number_between((current_direction),
                                                                (current_direction+45)) % 360)
         
         # em km
