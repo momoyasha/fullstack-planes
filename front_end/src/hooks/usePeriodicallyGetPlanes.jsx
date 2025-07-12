@@ -10,7 +10,6 @@ const usePeriodicallyGetPlanes = ({ ms_interval }) => {
   const [count, setCount] = useState(0);
 
   useEffect(() => {
-    console.log(`Renderização n.${count}`);
     setCount((prev) => prev + 1);
 
     const intervalId = setInterval(() => {
