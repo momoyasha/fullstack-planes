@@ -13,13 +13,14 @@ const PlanesOnTheMap = () => {
 
   return (
     <div id="PlanesOnTheMap">
-      {planes &&
+      {Array.isArray(planes) &&
         planes.map((plane) => (
           <ExtendedMarker
             position={[plane.latitude, plane.longitude]}
             color={"blue"}
             planeId={plane.id}
             key={plane.id}
+            rotation={plane.direction}
           />
         ))}
     </div>
