@@ -3,26 +3,27 @@
 import { useRef, useState } from "react";
 import { createContext } from "react";
 
+import { setTokens, clearTokens } from "../services/handleTokensInStorage";
+
 export const AuthenticationContext = createContext();
 
 export const AuthenticationContextProvider = ({ children }) => {
   const [accessToken, setAccessToken] = useState(null);
   const [refreshToken, setRefreshToken] = useState(null);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(true);
 
   const login = ({ newAccessToken, newRefreshToken }) => {
     setAccessToken(newAccessToken);
     setRefreshToken(newRefreshToken);
 
-    localStorage.setItem("accessToken", newAccessToken);
-    localStorage.setItem("refreshToken", newRefreshToken);
+    setTokens(newAccessToken, newRefreshToken);
   };
 
   const logout = () => {
     setAccessToken(null);
     setRefreshToken(null);
-    localStorage.removeItem("accessToken");
-    localStorage.removeItem("refreshToken");
+
+    clearTokens();
   };
 
   return (
