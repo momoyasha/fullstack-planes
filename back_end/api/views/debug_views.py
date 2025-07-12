@@ -14,5 +14,5 @@ class DebugView(APIView):
 
     def get(self, request):
         # plane = PlaneRepository.get_plane_by_id(id=1)
-        method_to_debug = PlaneBusiness.advance_plane_random(plane_id=1)
+        method_to_debug = PlaneBusiness.advance_plane_randomly(plane_id=1)
         return Response({"status": True }, status=status.HTTP_200_OK)
