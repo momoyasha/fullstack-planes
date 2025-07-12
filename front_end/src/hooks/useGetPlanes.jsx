@@ -11,8 +11,11 @@ export const useGetPlanes = () => {
   const fetchPlanes = async () => {
     try {
       const json = await getWithAuth({ url });
-      if (json) {
+
+      if (Array.isArray(json)) {
         setPlanes(json);
+      } else {
+        console.log("Resposta inesperada em fetchPlanes:", json);
       }
     } catch (error) {
       throw new Error(`Erro ao buscar aviões em ${url}: ${error}`);
