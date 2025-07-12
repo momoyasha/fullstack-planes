@@ -7,7 +7,7 @@ import { createContext } from "react";
 export const PlanesContext = createContext();
 
 export const PlanesContextProvider = ({ children }) => {
-  const [planes, setPlanes] = useState(null);
+  const [planes, setPlanes] = useState([]);
   const [selectedPlaneId, setSelectedPlaneId] = useState(null);
 
   return (
